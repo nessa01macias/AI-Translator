@@ -21,3 +21,10 @@ Metropolia-Wide AI Translator is a user-friendly web application designed to sim
 Whether you're a student, professional, or language enthusiast, Metropolia-Wide AI Translator simplifies language translation tasks. Try it out today, and experience the convenience of accurate and efficient translations.
 
 Note: This app is powered by advanced language models, ensuring high-quality translations. It's a handy tool for anyone dealing with Finnish and English languages.
+
+## Acknowledgements
+
+ - [Helsinki-NLP/opus-mt-en-fi](https://huggingface.co/Helsinki-NLP/opus-mt-en-fi)
+ - [Helsinki-NLP/opus-mt-fi-en](https://huggingface.co/Helsinki-NLP/opus-mt-fi-en)
+ - [TranslationPipeline](https://huggingface.co/docs/transformers/main_classes/pipelines#transformers.TranslationPipeline)
+

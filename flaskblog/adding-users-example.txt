@@ -1,7 +1,7 @@
 from flaskblog import app,db
 app.app_context().push()
 db.create_all()
-from flaskblog import User, Post
+from flaskblog.models import User, Translation
 >>> user_1 = User(username='Melany', password= 'password')
 >>> db.session.add(user_1)
 >>> user_2 = User(username='Harry', password= 'password')
@@ -45,11 +45,14 @@ User('2', 'Harry')
 
 
 from flaskblog import app, db
-from flaskblog.models import User
+from flaskblog.models import User, Translation
 
 # Activate the application context
 app.app_context().push()
 
+# maybe
+db.create_all()
+
 # Now you should be able to access the database
-users = User.query.all()
-print(users)
+print(User.query.all())
+print(Translation.query.all())

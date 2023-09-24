@@ -6,21 +6,6 @@ from flaskblog.models import User,Translation
 from flask_login import login_user, logout_user, current_user, login_required
 import requests, json
 
-dummy_translations = [
-    {
-        'autor': 'Corey Schafor',
-        'title' : 'Blog post 1',
-        'content': 'first post content',
-        'date_posted': 'April 20, 2018'
-    },
-    {
-        'autor': 'Corey Schafor',
-        'title' : 'Blog post 2',
-        'content': 'second post content',
-        'date_posted': 'April 21, 2018'
-    }
-]
-
 
 @app.route("/")
 @app.route("/home", methods= ['GET', 'POST'])
@@ -137,7 +122,7 @@ def get_translation_saved():
     target_lan = data["target_lan"]
     translated_content = data["translated_content"]
     user_id = data["user_id"]
-    print("/get_translation_saved: the data to be saved is ", data)
+    # print("/get_translation_saved: the data to be saved is ", data)
 
     if not all([original_lan, content, target_lan, translated_content]):
         return jsonify({"error": "Invalid request data"}), 400
@@ -155,7 +140,13 @@ def get_translation_saved():
 @app.route("/translations")
 @login_required
 def translations():
-    return render_template('translations.html', dummy_translations=dummy_translations)
+    try:
+        translations_history = Translation.query.filter_by(user_id=current_user.id).all()
+        # This line filters translations by the current user's ID
+    except Exception as e:
+        translations_history = []
+        print("Error occurred when retrieving translations from db:", str(e))
+    return render_template('translations.html', translations_history = translations_history)
 
 @app.route("/about")
 def about():

@@ -1,15 +1,27 @@
 {% extends "layout.html" %} 
 {% block content %} 
-    {% for translation in dummy_translations %}
-        <article class="media content-section">
+<legend class="border-bottom mb-3">Welcome, {{ current_user.username }}!</legend>
+    {% if translations_history|length == 0 %}
+        <p>You have not translated anything yet, so there is no history to show here. Come back after translating something! </p>
+    {% else %}
+    {% for translation in translations_history %}
+        <div class="contect-section">
         <div class="media-body">
-            <div class="article-metadata">
-            <a class="mr-2" href="#">{{ translation.author }}</a>
-            <small class="text-muted">{{ translation.date_translated }}</small>
+            <div class="article-metadata d-flex justify-content-between">
+                <div class="col">
+                    <a class="mr-2" href="#">{{ translation.user_id }}</a>
+                </div>
+                <div class="col">
+                    <small class="text-muted">{{ translation.date.strftime('%Y-%m-%d') }}</small>
+                </div>
+                <div class="col">
+                    <small class="text-muted"> {{ translation.original_lan }} to {{ translation.target_lan }}</small>
+                </div>
             </div>
-            <h2><a class="article-title" href="#">{{ translation.title }}</a></h2>
-            <p class="article-content">{{ translation.content }}</p>
+            <h4><a class="article-title" href="#">{{ translation.content }}</a></h4>
+            <p class="article-content">{{ translation.translated_content }}</p>
         </div>
-        </article>
+    </div>
     {% endfor %} 
+    {% endif %}
 {% endblock content %}

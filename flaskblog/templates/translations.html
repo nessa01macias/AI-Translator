@@ -1,0 +1,15 @@
+{% extends "layout.html" %} 
+{% block content %} 
+    {% for translation in dummy_translations %}
+        <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            <a class="mr-2" href="#">{{ translation.author }}</a>
+            <small class="text-muted">{{ translation.date_translated }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ translation.title }}</a></h2>
+            <p class="article-content">{{ translation.content }}</p>
+        </div>
+        </article>
+    {% endfor %} 
+{% endblock content %}

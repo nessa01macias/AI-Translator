@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '53926ed2fb071c29c11d17e16eb33f7b'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-port_number = 5000
+port_number = 8080
 
 #creating a sqlite database
 db = SQLAlchemy(app)

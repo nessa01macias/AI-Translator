@@ -1,6 +1,6 @@
 #  Metropolia-Wide AI Translator
 
-Metropolia-Wide AI Translator is a user-friendly web application designed to simplify translation tasks between Finnish and English languages. Whether you need to translate documents, texts, or phrases, this app has got you covered.
+Metropolia-Wide AI Translator is a user-friendly web application designed to simplify translation tasks between Finnish and English languages. Whether you need to translate texts, or phrases, this app has got you covered.
 
 ### Key Features (no registration needed)
 

@@ -1,4 +1,84 @@
-{% extends "layout.html" %}
-{% block content %}
-    <h1>About Page</h1>
+{% extends "layout.html" %} {% block content %}
+<div class="container mx-auto">
+    <div class="contect-section">
+
+  <h1>Metropolia-Wide AI Translator</h1>
+  <p style="margin-bottom: 40px">
+    Metropolia-Wide AI Translator is a user-friendly web application designed to
+    simplify translation tasks between Finnish and English languages. Whether
+    you need to translate documents, texts, or phrases, this app has got you
+    covered.
+  </p>
+  <h3 style="margin-bottom: 20px">Key features</h3>
+  <div class="row" style="margin-bottom: 40px">
+    <div class="col-md-6">
+      <div class="list-group">
+        <h4 class="list-group-item list-group-item-success">
+          Without an account:
+        </h4>
+        <li class="list-group-item">
+          Seamless translation: Translate text effortlessly between Finnish and
+          English, and vice versa. The app leverages state-of-the-art language
+          models to provide accurate and reliable translations.
+        </li>
+        <li class="list-group-item">
+          No Login required: You can start using the translation service without
+          the need for registration or login. It's quick and convenient for
+          one-time translations.
+        </li>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="list-group">
+        <h4 class="list-group-item list-group-item-primary">
+          With an account:
+        </h4>
+        <li class="list-group-item">
+          Seamless translation: Enjoy the same seamless translation capabilities
+          as without an account.
+        </li>
+        <li class="list-group-item">
+          Translation history: Keep track of your translation history. Easily
+          refer back to previous translations, making it handy for recurring
+          tasks.
+        </li>
+            <!-- Add empty lines for alignment with borders on the left and right sides -->
+            <li class="list-group-item" style="border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6;border-top: none; border-bottom: none;"></li>
+            <li class="list-group-item" style="border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6;border-top: none; border-bottom: none;"></li>
+            <li class="list-group-item" style="border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6;border-top: none; "></li>
+      </div>
+    </div>
+  </div>
+
+  <h3>Who can use tt?</h3>
+  <p style="margin-bottom: 40px">
+    Whether you're a student, professional, or language enthusiast,
+    Metropolia-Wide AI Translator simplifies language translation tasks. Try it
+    out today and experience the convenience of accurate and efficient
+    translations.
+  </p>
+
+  <h3>Why I created this website?</h3>
+  <div>
+    <p>
+        This website reflects my strong passion for artificial intelligence, coding and my eagerness to contribute to Metropolia UAS's AI development project. I am thrilled at the prospect to use my work to empower staff and students, drive research, and unlock new possibilities.
+    </p>
+    <p>
+        I'm genuinely excited to apply my skills to this project, eager to learn and grow within the team. I'm ready to embrace this challenge!
+    </p >
+    </div>
+
+  <h3>Note</h3>
+  <p>
+    This app is powered by advanced language models, ensuring high-quality
+    translations. It's a handy tool for anyone dealing with Finnish and English
+    languages. Please refer to the following pages for more information:
+    <ul>
+        <li><a href="https://huggingface.co/Helsinki-NLP/opus-mt-en-fi">Helsinki-NLP/opus-mt-en-fi</a></li>
+        <li><a href="https://huggingface.co/Helsinki-NLP/opus-mt-fi-en">Helsinki-NLP/opus-mt-fi-en</a></li>
+        <li><a href="https://huggingface.co/docs/transformers/main_classes/pipelines#transformers.TranslationPipeline">TranslationPipeline</a></li>
+    </ul>  
+  </p>
+  </div>
+</div>
 {% endblock content %}

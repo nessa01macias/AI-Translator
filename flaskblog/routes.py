@@ -26,7 +26,6 @@ dummy_translations = [
 def home():
     url = f'http://localhost:{port_number}/get_translation'
     form = TranslationForm()
-    submitted_content = None
     if form.validate_on_submit():    
         language = form.language.data
         submitted_content = form.content.data
@@ -42,7 +41,7 @@ def home():
         flash(f'{translated_content["translation_text"]}', 'secondary')
 
         return redirect(url_for('home'))
-    return render_template('home.html', form=form, submitted_content = submitted_content)
+    return render_template('home.html', form=form)
 
 @app.route("/get_translation", methods=['GET', 'POST'])
 def get_translation():

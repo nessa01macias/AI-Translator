@@ -23,5 +23,5 @@ class LoginForm(FlaskForm):
 
 class TranslationForm(FlaskForm):
     language = SelectField('Language', choices=[('finnish', 'Finnish to English'), ('english', 'English to Finnish')], validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()], default='')
+    content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Translate')

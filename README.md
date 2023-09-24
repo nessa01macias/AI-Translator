@@ -2,8 +2,8 @@
 
 Metropolia-Wide AI Translator is a user-friendly web application designed to simplify translation tasks between Finnish and English languages. Whether you need to translate texts, or phrases, this app has got you covered.
 
-### Key Features 
-#### Without an account
+## Key Features 
+### Without an account
 
 - Seamless Translation: Translate text effortlessly between Finnish and English, and vice versa. The app leverages state-of-the-art language models to provide accurate and reliable translations.
 - No Login Required: You can start using the translation service without the need for registration or login. It's quick and convenient for one-time translations.

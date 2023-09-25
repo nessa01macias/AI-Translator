@@ -8,10 +8,7 @@ Please refer to the section "webpage images" below to get an overview of how the
 pip install -r requirements.txt
 python3 run.py
 ```
-
-The deployment is now in progress, the URL is http://3.84.155.114/home. 
-NOTE: Please take into consideration that the deployment is in progress, therefore some routes might not work yet. Also, the instance may be shut down to avoid costs so it would be not accessible at all.
-However, it is currently deployed on a EC2 Linux Server.
+Also refer to the section "deployment" for more information.
 
 ## Key Features 
 ### Without an account
@@ -64,4 +61,12 @@ Note: This app is powered by advanced language models, ensuring high-quality tra
 
 /About: contains information about the webpage purposes
 <img width="1477" alt="image" src="https://github.com/nessa01macias/Metropolia-Wide-AI-Translator/assets/92785400/fc5449d3-c3c4-46b7-a9d0-8191e1a0ddbe">
+
+## Deployment
+The deployment is now in progress, the URL is http://3.84.155.114/home. 
+NOTE: Please take into consideration that the deployment is in progress, therefore some routes might not work yet. Also, the instance may be shut down to avoid costs so it would be not accessible at all.
+However, it is currently deployed on a EC2 Linux Server in AWS cloud. Please refer to image below for reference.
+
+<img width="1728" alt="image" src="https://github.com/nessa01macias/Metropolia-Wide-AI-Translator/assets/92785400/011415bb-d740-46ba-92d4-2314b25f47c3">
+<img width="1489" alt="image" src="https://github.com/nessa01macias/Metropolia-Wide-AI-Translator/assets/92785400/dd98adbb-1ecf-4f79-91e6-1d4151e00aa2">
 

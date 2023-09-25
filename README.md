@@ -63,10 +63,17 @@ Note: This app is powered by advanced language models, ensuring high-quality tra
 <img width="1477" alt="image" src="https://github.com/nessa01macias/Metropolia-Wide-AI-Translator/assets/92785400/fc5449d3-c3c4-46b7-a9d0-8191e1a0ddbe">
 
 ## Deployment
-The deployment is now in progress, the URL is http://3.84.155.114/home. 
-NOTE: Please take into consideration that the deployment is in progress, therefore some routes might not work yet. Also, the instance may be shut down to avoid costs so it would be not accessible at all.
-However, it is currently deployed on a EC2 Linux Server in AWS cloud. Please refer to image below for reference.
+The deployment is now in progress, and you can access the application at [this URL](http://3.84.155.114/home). 
 
+**Note:** Please take into consideration that the deployment is in progress, and some routes might not work yet. Additionally, the instance may be shut down to avoid costs, making it temporarily inaccessible.
+
+The application is currently deployed on an EC2 Linux Server in the AWS cloud. It's important to mention that the machine learning models used by this application require libraries like TensorFlow, which can consume a significant amount of memory. Due to these memory requirements, the free tier instance was not sufficient, and the instance needs to be shut down when it is not actively needed to prevent unnecessary costs.
+
+Thank you for your understanding! Kindly refer to the images below for reference:
+
+Website working with the public IP address as the Linux server is on.
 <img width="1728" alt="image" src="https://github.com/nessa01macias/Metropolia-Wide-AI-Translator/assets/92785400/011415bb-d740-46ba-92d4-2314b25f47c3">
+
+Instance on AWS cloud
 <img width="1489" alt="image" src="https://github.com/nessa01macias/Metropolia-Wide-AI-Translator/assets/92785400/dd98adbb-1ecf-4f79-91e6-1d4151e00aa2">
 

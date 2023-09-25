@@ -2,6 +2,17 @@
 
 Metropolia-Wide AI Translator is a user-friendly web application designed to simplify translation tasks between Finnish and English languages. Whether you need to translate texts, or phrases, this app has got you covered.
 
+## How to use it?
+Please refer to the section "webpage images" below to get an overview of how the app looks like for now. It is also possible to fork the repostory, and then run the following to get the webpage running locally:
+```
+pip install -r requirements.txt
+python3 run.py
+```
+
+
+The deployment is now in progress, the URL is http://3.84.155.114/home. 
+NOTE: Please take into consideration that the deployment is in progress, therefore some routes might not work yet.
+
 ## Key Features 
 ### Without an account
 

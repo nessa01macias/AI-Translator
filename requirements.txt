@@ -15,4 +15,5 @@ WTForms
 Jinja2
 flask-migrate
 python-dotenv
+gunicorn
 google-generativeai

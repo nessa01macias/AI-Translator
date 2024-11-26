@@ -9,7 +9,7 @@ import google.generativeai as genai
 import os
 
 load_dotenv()
-port_number = 5000
+port_number = 8000
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')

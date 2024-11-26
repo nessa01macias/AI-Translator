@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, jsonify, session
 from sqlalchemy.exc import SQLAlchemyError
-from flaskblog import app, db, bcrypt, pipe_en_to_fi, pipe_fi_to_en, port_number
+from flaskblog import app, db, bcrypt, pipe_en_to_fi, pipe_fi_to_en
 from flaskblog.form import RegistrationForm, LoginForm, TranslationForm
 from flaskblog.models import User,Translation
 from flask_login import login_user, logout_user, current_user, login_required

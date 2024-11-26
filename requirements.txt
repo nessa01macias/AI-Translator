@@ -13,3 +13,6 @@ flask-Login
 SQLAlchemy
 WTForms
 Jinja2
+flask-migrate
+python-dotenv
+google-generativeai

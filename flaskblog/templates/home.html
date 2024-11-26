@@ -23,9 +23,9 @@
     />
 
     {% if title %}
-    <title>Metropolia-wide AI - {{ title }}</title>
+    <title>AI Translator - {{ title }}</title>
     {% else %}
-    <title>Metropolia-wide AI Job Application</title>
+    <title>AI Translator</title>
     {% endif %}
   </head>
   <body>
@@ -33,7 +33,7 @@
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
           <a class="navbar-brand mr-4 text-white"
-            >Metropolia-wide AI Job Application
+            >AI Translator
           </a>
           <button
             class="navbar-toggler"
@@ -99,8 +99,11 @@
                 </fieldset>
 
                 <div class="form-group">
-                {{ form.submit(class="btn btn-secondary") }}
-                </div>
+                  <button id="submit-button" type="submit" class="btn btn-secondary">
+                      <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                      Submit
+                  </button>
+              </div>              
             </form>
 
             <div class="form-group mb-3 mt-3">
@@ -139,5 +142,23 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script>
+      // Wait for the DOM to fully load
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const button = document.getElementById("submit-button");
+        const spinner = document.getElementById("spinner");
+    
+        form.addEventListener("submit", function () {
+          // Show the spinner
+          spinner.classList.remove("d-none");
+    
+          // Disable the button and change its text
+          button.disabled = true;
+          button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...';
+        });
+      });
+    </script>
+    
   </body>
 </html>

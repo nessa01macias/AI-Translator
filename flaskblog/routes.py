@@ -7,35 +7,99 @@ from flask_login import login_user, logout_user, current_user, login_required
 import requests, json
 
 
-@app.route("/")
-@app.route("/home", methods= ['GET', 'POST'])
+@app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 def home():
-    url = f'http://localhost:{port_number}/get_translation'
     form = TranslationForm()
-
-    # Include user_id in the request data
     user_id = current_user.id if current_user.is_authenticated else None
 
-    if form.validate_on_submit():    
-        language = form.language.data
-        submitted_content = form.content.data
-        data = {"original_lan": language, "content": submitted_content, "user_id": user_id}
-        # print(f'1. this is written in {language}. content to translate: {data["content"]}')
-        translated_content_response = requests.post(url, json=data)
-        # Deserialize the JSON response to access the content
+    if form.validate_on_submit():
+        # Get form data
+        original_lan = form.language.data
+        content = form.content.data
+
+        # Call the translation logic directly 
+        if original_lan == "english":
+            translated_text = pipe_en_to_fi(content)
+        elif original_lan == "finnish":
+            translated_text = pipe_fi_to_en(content)
+        else:
+            flash("Unsupported language", "danger")
+            return redirect(url_for("home"))
+
+        # Save to database if the user is logged in
+        if user_id:
+            try:
+                new_translation = Translation(
+                    original_lan=original_lan,
+                    target_lan="finnish" if original_lan == "english" else "english",
+                    content=content,
+                    translated_content=translated_text,
+                    user_id=user_id,
+                )
+                db.session.add(new_translation)
+                db.session.commit()
+            except SQLAlchemyError as e:
+                print(f"Database error: {e}")
+                flash("Failed to save translation", "danger")
+
+        # Flash messages for display
+        flash(f"{content}", "dark")
+        flash(f"{translated_text}", "secondary")
+
+        return redirect(url_for("home"))
+
+    return render_template("home.html", form=form)
+
+@app.route("/translate", methods=["POST"])
+def translate():
+    # Extract data from the request
+    data = request.json
+    original_lan = data.get("original_lan")
+    content = data.get("content", "").strip()
+    user_id = data.get("user_id")
+
+    # Validate input
+    if not original_lan or not content:
+        return jsonify({"error": "Invalid request data"}), 400
+
+    # Determine translation direction
+    if original_lan == "english":
+        translated_text = pipe_en_to_fi(content)
+        target_lan = "finnish"
+    elif original_lan == "finnish":
+        translated_text = pipe_fi_to_en(content)
+        target_lan = "english"
+    else:
+        return jsonify({"error": "Unsupported language"}), 400
+
+    # Prepare response
+    response = {
+        "original_lan": original_lan,
+        "target_lan": target_lan,
+        "content": content,
+        "translated_content": translated_text,
+    }
+
+    # Save to database if user is logged in
+    if user_id:
         try:
-            # Attempt to parse JSON from the response
-            translated_content = translated_content_response.json()
-        except json.decoder.JSONDecodeError as e:
-            print(f"JSON decoding error: {e}")
-            return jsonify({"error": "Invalid translation response"})
+            user = User.query.get(int(user_id))
+            if user:
+                new_translation = Translation(
+                    original_lan=original_lan,
+                    target_lan=target_lan,
+                    content=content,
+                    translated_content=translated_text,
+                    user_id=user_id,
+                )
+                db.session.add(new_translation)
+                db.session.commit()
+        except SQLAlchemyError as e:
+            print(f"Database error: {e}")
+            return jsonify({"error": "Failed to save translation"}), 500
 
-        # print(f'4. result from request: {translated_content}')
-        flash(f'{submitted_content}', 'dark')
-        flash(f'{translated_content["translation_text"]}', 'secondary')
-
-        return redirect(url_for('home'))
-    return render_template('home.html', form=form)
+    return jsonify(response)
 
 
 @app.route("/register", methods=['GET','POST'])
@@ -79,63 +143,6 @@ def login():
             else:
                 flash('Login unsucessfull. Please check username or password', 'warning')
     return render_template('login.html', title= 'Login', form= form)
-
-@app.route("/get_translation", methods=['GET', 'POST'])
-def get_translation():
-    url = f'http://localhost:{port_number}/get_translation_saved'
-
-    # extracting the data from the request form from /home
-    data = request.json
-    original_lan = data["original_lan"]
-    content = data["content"].strip()
-    user_id = data["user_id"]
-    # print(f'2. got from the incoming post request {data}')
-
-    target_lan = None
-    translated_text = None
-    if (original_lan == "english"):
-        translated_text = pipe_en_to_fi(content)
-        target_lan = "finnish"
-    elif (original_lan == "finnish"):
-        translated_text = pipe_fi_to_en(content)
-        target_lan = "english"
-
-    # Load the user using the user_id
-    if user_id:
-        user = User.query.get(int(user_id))
-        login_user(user)
-        all_data = {"original_lan": original_lan, "content": content, "target_lan": target_lan, "translated_content":translated_text[0]['translation_text'], "user_id": user_id}
-        translated_content_saved_db_response = requests.post(url, json=all_data)
-        print("translated_content_saved_db_response: ",translated_content_saved_db_response)
-
-    print("/get_translation: current user", current_user)
-
-    # print(f'3. this is my dummy translation:{translated_text[0]["translation_text"]}')
-    return jsonify(translated_text[0])
-
-@app.route("/get_translation_saved", methods=['GET', 'POST'])
-def get_translation_saved():
-
-    data = request.json
-    original_lan = data["original_lan"]
-    content = data["content"]
-    target_lan = data["target_lan"]
-    translated_content = data["translated_content"]
-    user_id = data["user_id"]
-    # print("/get_translation_saved: the data to be saved is ", data)
-
-    if not all([original_lan, content, target_lan, translated_content]):
-        return jsonify({"error": "Invalid request data"}), 400
-
-    try:
-        new_translation = Translation(original_lan= original_lan, content= content, target_lan= target_lan, translated_content = translated_content, user_id = user_id)
-        db.session.add(new_translation)
-        db.session.commit()
-        return jsonify({"message": "Translation saved successfully"})
-    except SQLAlchemyError as e:
-        print(f"An error occurred: {str(e)}")
-        return jsonify({"error": "Failed to save translation"}), 500
-
 
 @app.route("/translations")
 @login_required
